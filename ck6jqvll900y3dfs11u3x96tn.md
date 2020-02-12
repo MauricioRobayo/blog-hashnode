@@ -209,5 +209,5 @@ If you have any app that you deployed including your private credentials, go ahe
 
 ## Acknowledgments
 
-Huge thanks to [@matheus-fls](https://github.com/matheus-fls) who provided invaluable feedback to make the repository code better, and to [@majovanilla](https://github.com/majovanilla) who took a lot of time to make this article more readable.
+Huge thanks to [@matheus-fls](https://github.com/matheus-fls) for the invaluable feedback provided to improve the code, and to [@majovanilla](https://github.com/majovanilla) for her massive contribution to make this article more readable.
 
