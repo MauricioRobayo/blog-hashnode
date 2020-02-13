@@ -90,13 +90,13 @@ __allowedDomains__: An array of domains you want to allow to make calls to the p
 
 Do not include pathnames:
 
-* Wrong: https://example.com/some-path ❌
-* Right: https://example.com ✔
+* Wrong: `https://example.com/some-path` ❌
+* Right: `https://example.com` ✔
 
 Do not include trailing slash:
 
-* Wrong: https://example.com/ ❌
-* Right: https://example.com ✔
+* Wrong: `https://example.com/` ❌
+* Right: `https://example.com` ✔
 
 __proxies__: An array with the configuration options for each API service. The [config file](https://github.com/MauricioRobayo/api-key-proxy-server/blob/master/src/config.js) included provides configurations for the [Open Weather API](https://openweathermap.org/api), the [ipinfo API](https://ipinfo.io/), and the [GitHub API](https://developer.github.com/v3/). You can remove or add as many as you need:
 
