@@ -194,6 +194,6 @@ Take a look at that `init` function, isn't it expressive? We have written some c
 
 ## Conclusion
 
-This is not _the solution_ neither the _way to do it_. This is just an example of some code refactoring during constant commitment to writing self-documented, clean, and maintainable code.
+This is not _the solution_ neither the _way to do it_. This is just an example of some code refactoring during the constant commitment to writing self-documented, clean, and maintainable code.
 
 Some programming concepts seem like they are just concepts, with no real-life application. While we are looking to improve our code and make it clean and maintainable we might come up with a better implementation without even knowing the name of the pattern we are using. Or sometimes we just have a sense that something is not looking right, and looking for a way to do it better should be our daily battle.
