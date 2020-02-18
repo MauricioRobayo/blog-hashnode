@@ -4,7 +4,7 @@ Doing fetch requests is one of the most frequent tasks as a front-end JavaScript
 
 ## The Setup
 
-We won't worry about error handling or edge cases as this is going to be just an example to illustrate the main points of this article.
+We won't worry about error handling or edge cases as this is going to be just an example to illustrate the main point of this article.
 
 Let's assume we are going to build a Weather App and we want to fetch the data from the [Open Weather API](https://openweathermap.org/api). We might use something like this in our code:
 
@@ -64,7 +64,7 @@ init()
 
 By now you should have noticed that there is a big issue here: we are repeating ourselves while using the `fetch` web API. It is almost the same code on both the `fetchWeather` and the `fetchIpinfo` functions.
 
-We know how to solve this. Let's refactor by moving the duplicate code to its own function which we will call `fetchData` so we can reuse it for both cases or any other that could come up:
+We know how to solve this. Let's refactor by moving the duplicate code into its own function which we will call `fetchData` so we can reuse it for both cases or any other that could come up:
 
 ```js
 const fetchData = async (endpoint, querystring) => {
@@ -101,7 +101,9 @@ There we go. Basically, we are providing a simplified interface to the `fetch` w
 
 ## Currying
 
-But still, something doesn't seem right with the code. The `fetchWeather` and the `fetchIpinfo` functions are very similar. It's time for some [currying](https://javascript.info/currying-partials). We will remove the first argument of our `fetchData` function and make it return a new function based on that, so we can create as many `fetch*` functions as we need based on the endpoint provided:
+But still, something doesn't seem right with the code. The `fetchWeather` and the `fetchIpinfo` functions are very similar. It's time for some [currying](https://javascript.info/currying-partials). 
+
+We can remove the first argument of our `fetchData` function and make it return a new function based on that, so we can create as many `fetch*` functions as we need based on the endpoint provided:
 
 ```js
 const fetchData = endpoint => async querystring => {
