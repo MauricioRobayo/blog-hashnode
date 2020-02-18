@@ -2,7 +2,7 @@
 
 Doing fetch requests is one of the most frequent tasks as a front-end JavaScript developer. If you are doing different fetch calls to different services on the same project, you might benefit from the [facade pattern](http://jargon.js.org/_glossary/FACADE_PATTERN.md), [currying](https://javascript.info/currying-partials), and [closures](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures).
 
-### The Setup
+## The Setup
 
 We won't worry about error handling or edge cases as this is going to be just an example to illustrate the main points of this article.
 
@@ -26,6 +26,8 @@ const init = async () => {
 
 init()
 ```
+
+## The Facade Pattern
 
 This looks fine so far. But now let's say that we want to get the city based on the IP address of the client using the [ipinfo API](https://ipinfo.io/), so we might be tempted to create another fetch function for that:
 
@@ -95,9 +97,11 @@ const init = async () => {
 init()
 ```
 
-There we go. Basically, we are providing a simplified interface to the `fetch` web API, and we have successfully implemented the __facade pattern__ to improve our code. That's all there is to it,  we are mastering OOP design patterns 😄.
+There we go. Basically, we are providing a simplified interface to the `fetch` web API, and we have successfully implemented the [facade pattern](http://jargon.js.org/_glossary/FACADE_PATTERN.md) to improve our code. That's all there is to it,  we are mastering OOP design patterns 😄.
 
-But still, something doesn't seem right with the code. The `fetchWeather` and the `fetchIpinfo` functions are very similar. It's time for some __currying__. We will remove the first argument of our `fetchData` function and make it return a new function based on that, so we can create as many `fetch*` functions as we need based on the endpoint provided:
+## Currying
+
+But still, something doesn't seem right with the code. The `fetchWeather` and the `fetchIpinfo` functions are very similar. It's time for some [currying](https://javascript.info/currying-partials). We will remove the first argument of our `fetchData` function and make it return a new function based on that, so we can create as many `fetch*` functions as we need based on the endpoint provided:
 
 ```js
 const fetchData = endpoint => async querystring => {
@@ -120,7 +124,9 @@ const init = async () => {
 init()
 ```
 
-Dam! That code is looking sexy! We have successfully removed a lot of the duplicate code using the __facade pattern__, and we are reducing the arity of our `fetchData` function by __currying__ it and making it return a new function depending on the `endpoint` that we are going to use.
+Dam! That code is looking sexy! We have successfully removed a lot of the duplicate code using the [facade pattern](http://jargon.js.org/_glossary/FACADE_PATTERN.md), and we are reducing the [arity](https://en.wikipedia.org/wiki/Arity) of our `fetchData` function by [currying](https://javascript.info/currying-partials) it and making it return a new function depending on the `endpoint` that we are going to use.
+
+## Closures
 
 Code is looking good, but now let's say we want to implement a cache to avoid doing repeated calls to the API services as the information is not likely to change between a few minutes.
 
@@ -134,7 +140,7 @@ Maybe we can store the data we have previously fetched using `localStorage` and 
 
 We can use 10 minutes expire time for the Open Weather API `localStorage` cache, and a longer cache time for the ipinfo API, for example, 30 minutes. That way we are lowering the requests made to the services decreasing the use of our requests quota, without affecting the accuracy of our app.
 
-To do that, we can take advantage of the closure we have created when currying the `fetchData` function, passing an object literal with the endpoint and the expiration time in minutes for the cache:
+To do that, we can take advantage of the closure we have created when [currying](https://javascript.info/currying-partials) the `fetchData` function, passing an object literal with the endpoint and the expiration time in minutes for the cache:
 
 ```
 const fromCache = (key, cacheInMinutes) => {
@@ -182,9 +188,10 @@ const init = async () => {
 init()
 ```
 
-Take a look at that `init` function, isn't it expressive? We have written some clean and maintainable code using the __facade pattern__, __currying__, and __closures__. Now we can create as many `fetch*` functions as we want and we can give an expiration time in minutes for the `localStorage` cache for each of those functions.
+Take a look at that `init` function, isn't it expressive? We have written some clean and maintainable code using the [facade pattern](http://jargon.js.org/_glossary/FACADE_PATTERN.md), [currying](https://javascript.info/currying-partials), and [closures](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures). Now we can create as many `fetch*` functions as we want and we can give an expiration time in minutes for the `localStorage` cache for each of those functions.
 
+## Conclusion
 
+This is not _the solution_ neither the _way to do it_. This is just an example of some code refactoring during constant commitment to writing self-documented, clean, and maintainable code.
 
-
-
+Some programming concepts seem like they are just concepts, with no real-life application. While we are looking to improve our code and make it clean and maintainable we might come up with a better implementation without even knowing the name of the pattern we are using. Or sometimes we just have a sense that something is not looking right, and looking for a way to do it better should be our daily battle.
