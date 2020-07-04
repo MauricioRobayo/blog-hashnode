@@ -18,7 +18,7 @@ In programming, reading a conditional that is wrap inside a negation adds anothe
 In the video, he is using a real piece of code that looks like this:
 
 ```js
- if (!(exports.sqlTimingLogger.isErrorEnabled() &&(!exports.DriverSpy.dumpSqlFilteringOn || shouldSqlBeLogged(sql)))) {
+ if (!(exports.sqlTimingLogger.isErrorEnabled() && (!exports.DriverSpy.dumpSqlFilteringOn || shouldSqlBeLogged(sql)))) {
   return
 }
 ```
@@ -58,7 +58,7 @@ if (exports.DriverSpy.dumpSqlFilteringOn && !shouldSqlBeLogged(sql)) {
 Let's compare that with the initial code:
 
 ```js
- if (!(exports.sqlTimingLogger.isErrorEnabled() &&(!exports.DriverSpy.dumpSqlFilteringOn || shouldSqlBeLogged(sql)))) {
+ if (!(exports.sqlTimingLogger.isErrorEnabled() && (!exports.DriverSpy.dumpSqlFilteringOn || shouldSqlBeLogged(sql)))) {
   return
 }
 ```
