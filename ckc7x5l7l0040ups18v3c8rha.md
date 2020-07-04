@@ -18,7 +18,7 @@ In programming, reading a conditional that is wrap inside a negation adds anothe
 In the video, he is using a real piece of code that looks like this:
 
 ```js
- if (!(exports.sqlTimingLogger.isErrorEnabled() && (!exports.DriverSpy.dumpSqlFilteringOn || shouldSqlBeLogged(sql)))) {
+if (!(conditionA && (!conditionB || conditionC))) {
   return
 }
 ```
@@ -28,7 +28,7 @@ Ouch! Understanding that condition requires a lot of mental effort. So, how can 
 First, we can remove the negation by reversing what's inside the parenthesis:
 
 ```js
- if (!exports.sqlTimingLogger.isErrorEnabled() || !(!exports.DriverSpy.dumpSqlFilteringOn || shouldSqlBeLogged(sql))) {
+if (!conditionA || !(!conditionB || conditionC)) {
   return
 }
 ```
@@ -36,7 +36,7 @@ First, we can remove the negation by reversing what's inside the parenthesis:
 Now the outer negation is gone, but we have another inner negation to which we can also apply De Morgan's law:
 
 ```js
- if (!exports.sqlTimingLogger.isErrorEnabled() || (exports.DriverSpy.dumpSqlFilteringOn && !shouldSqlBeLogged(sql))) {
+if (!conditionA || (conditionB && !conditionC))) {
   return
 }
 ```
@@ -46,11 +46,11 @@ This becomes easier to understand as we don't have to negate some inner logic. I
 What's more, now that we have removed any wrapping negations effortlessly but applying De Morgan's law, we can simplify this into separate if statements which will make this a breeze to understand:
 
 ```js
-if (!exports.sqlTimingLogger.isErrorEnabled()) {
+if (!conditionA) {
   return
 }
 
-if (exports.DriverSpy.dumpSqlFilteringOn && !shouldSqlBeLogged(sql)) {
+if (conditionB && !conditionC) {
   return
 }
 ```
@@ -58,7 +58,7 @@ if (exports.DriverSpy.dumpSqlFilteringOn && !shouldSqlBeLogged(sql)) {
 Let's compare that with the initial code:
 
 ```js
- if (!(exports.sqlTimingLogger.isErrorEnabled() && (!exports.DriverSpy.dumpSqlFilteringOn || shouldSqlBeLogged(sql)))) {
+if (!(conditionA && (!conditionB || conditionC))) {
   return
 }
 ```
