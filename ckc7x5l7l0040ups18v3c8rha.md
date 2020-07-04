@@ -18,12 +18,22 @@ In programming, reading a conditional that is wrap inside a negation adds anothe
 In the video, he is using a real piece of code that looks like this:
 
 ```js
+if ((!exports.sqlTimingLogger.isErrorEnabled() && (!exports.DriverSpy.dumpSqlFilteringOn || shouldSqlBeLogged(sql)))) {
+  return
+}
+```
+
+Ouch! Understanding that condition requires a lot of mental effort. 
+
+Let's make it more general so it is easier to follow the process:
+
+```js
 if (!(conditionA && (!conditionB || conditionC))) {
   return
 }
 ```
 
-Ouch! Understanding that condition requires a lot of mental effort. So, how can we simplify this by applying De Morgan's laws?
+So, how can we simplify this by applying De Morgan's laws?
 
 First, we can remove the negation by reversing what's inside the parenthesis:
 
